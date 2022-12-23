@@ -29,7 +29,10 @@ export const SignupPage = () => {
     passwordValid,
     emailValid,
     displayNameValid,
-  } = useForm((formData = {}), (formValidations = {}));
+    isFormValid,
+  } = useForm(formData, formValidations);
+
+  console.log(displayNameValid);
 
   const onSubmit = (event) => {
     event.preventDefault();
