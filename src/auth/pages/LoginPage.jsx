@@ -15,7 +15,7 @@ import {
   startGoogleSignIn,
   startLoginEmailWithPassword,
 } from "../../store/auth";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const formData = {
   email: "",
@@ -34,13 +34,20 @@ export const LoginPage = () => {
 
   const isAuthenticating = useMemo(() => status === "checking", [status]);
 
-  const { onInputChange, password, email, isFormValid } = useForm(
-    formData,
-    formValidations
-  );
+  const [isFormSent, setIsFormSent] = useState(false);
+
+  const {
+    onInputChange,
+    password,
+    email,
+    isFormValid,
+    passwordValid,
+    emailValid,
+  } = useForm(formData, formValidations);
 
   const onSubmit = (event) => {
     event.preventDefault();
+    setIsFormSent(true);
 
     if (!isFormValid) return;
     dispatch(startLoginEmailWithPassword({ email, password }));
@@ -62,6 +69,8 @@ export const LoginPage = () => {
               name="email"
               value={email}
               onChange={onInputChange}
+              error={!!emailValid && isFormSent}
+              helperText={emailValid && isFormSent}
               fullWidth
             />
           </Grid>
@@ -74,6 +83,8 @@ export const LoginPage = () => {
               name="password"
               value={password}
               onChange={onInputChange}
+              error={!!passwordValid && isFormSent}
+              helperText={passwordValid && isFormSent}
               fullWidth
             />
           </Grid>
