@@ -50,6 +50,7 @@ export const LoginPage = () => {
     setIsFormSent(true);
 
     if (!isFormValid) return;
+
     dispatch(startLoginEmailWithPassword({ email, password }));
   };
 
@@ -59,7 +60,10 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={onSubmit}
+        className="animate__animated animate__fadeIn animate__faster"
+      >
         <Grid container>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TextField
@@ -70,7 +74,7 @@ export const LoginPage = () => {
               value={email}
               onChange={onInputChange}
               error={!!emailValid && isFormSent}
-              helperText={emailValid && isFormSent}
+              helperText={emailValid}
               fullWidth
             />
           </Grid>
@@ -84,7 +88,7 @@ export const LoginPage = () => {
               value={password}
               onChange={onInputChange}
               error={!!passwordValid && isFormSent}
-              helperText={passwordValid && isFormSent}
+              helperText={passwordValid}
               fullWidth
             />
           </Grid>

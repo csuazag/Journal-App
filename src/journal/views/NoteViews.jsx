@@ -9,6 +9,7 @@ export const NoteViews = () => {
       container
       direction="row"
       justifyContent="space-between"
+      className="animate__animated animate__fadeIn animate__faster"
       sx={{ mb: 1 }}
     >
       <Grid item>
