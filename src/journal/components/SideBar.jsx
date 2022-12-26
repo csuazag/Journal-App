@@ -14,45 +14,33 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export const SideBar = ({ drawerWith }) => {
+export const SideBar = ({ drawerWidth = 240 }) => {
   const { displayName } = useSelector((state) => state.auth);
+  const { notes } = useSelector((state) => state.journal);
 
   return (
     <Box
       component="nav"
-      sx={{
-        width: { sm: drawerWith, flexShrink: { sm: 0 } },
-      }}
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
       <Drawer
+        variant="permanent" // temporary
         open
-        variant="permanent"
         sx={{
           display: { xs: "block" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWith },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" noWrap component="div">
             {displayName}
           </Typography>
         </Toolbar>
-
         <Divider />
 
         <List>
-          {["January", "February", "March"].map((month) => (
-            <ListItem key="month" disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <TurnedInNot />
-                </ListItemIcon>
-                <Grid container>
-                  <ListItemText primary={month} />
-                  <ListItemText secondary={"Text text text text text"} />
-                </Grid>
-              </ListItemButton>
-            </ListItem>
+          {notes.map((note) => (
+            <SideBarItem key={note.id} {...note} />
           ))}
         </List>
       </Drawer>
