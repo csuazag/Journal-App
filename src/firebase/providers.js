@@ -8,7 +8,6 @@ import {
 import { FirebaseAuth } from "./config";
 
 const handleError = (error) => {
-  console.log({ error });
   return { errorMessage: error.message, ok: false };
 };
 

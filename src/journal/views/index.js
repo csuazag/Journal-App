@@ -1,2 +1,2 @@
-export * from "./NoteViews";
+export * from "./NoteView";
 export * from "./NothingSelectedView";
